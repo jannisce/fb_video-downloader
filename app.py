@@ -32,7 +32,7 @@ class VideoLinkExtractor:
         """Extracts and returns the title from HTML content."""
         return self.get_link(r'<title>(.*?)<\/title>')
 
-@app.route('/get_video_links', methods=['GET'])
+@app.route('/facebook', methods=['GET'])
 def get_video_links():
     """Endpoint to get video links."""
     url = request.args.get('url')
