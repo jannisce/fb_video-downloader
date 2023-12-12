@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 import requests
 import re
 import json
@@ -67,13 +67,10 @@ def get_video_links():
 
         sd_link = extractor.get_link(r'browser_native_sd_url":"([^"]+)"')
         if sd_link:
-            video_info['links']['Download Low Quality'] = sd_link + '&dl=1'
+            return redirect(sd_link + '&dl=1')
+        else:
+            return jsonify({'success': False, 'message': 'SD video link not found'}), 404
 
-        hd_link = extractor.get_link(r'browser_native_hd_url":"([^"]+)"')
-        if hd_link:
-            video_info['links']['Download High Quality'] = hd_link + '&dl=1'
-
-        return jsonify(video_info)
     except requests.RequestException as e:
         logging.error(f"Request failed: {e}")
         return jsonify({'success': False, 'message': str(e)}), 500
