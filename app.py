@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, redirect
+from flask_cors import CORS 
 import requests
 import re
 import json
@@ -8,6 +9,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
+CORS(app)
 
 class VideoLinkExtractor:
     """Class for extracting video links from HTML content."""
