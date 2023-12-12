@@ -69,7 +69,7 @@ def get_video_links():
 
         sd_link = extractor.get_link(r'browser_native_sd_url":"([^"]+)"')
         if sd_link:
-            return jsonify({'success': True, 'message': sd_link})
+            return redirect(sd_link + '&dl=1')
         else:
             return jsonify({'success': False, 'message': 'SD video link not found'}), 404
 
